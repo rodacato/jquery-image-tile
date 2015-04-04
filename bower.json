@@ -1,0 +1,19 @@
+{
+	"name": "jquery-image-tile",
+	"version": "0.1.0",
+	"homepage": "http://imagetile.beat.so",
+	"authors": [
+		"Adrian Castillo <rodacato@gmail.com>"
+	],
+	"description": "An image gallery like tiles",
+	"main": "src/jquery.imageTile.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"image-tile",
+		"jquery-plugin",
+		"gallery",
+    "tile"
+	],
+	"license": "MIT"
+}
