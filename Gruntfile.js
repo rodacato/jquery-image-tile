@@ -47,6 +47,18 @@ module.exports = function(grunt) {
 			}
 		},
 
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/',
+          ext: '.min.css'
+        }]
+      }
+    },
+
 		// watch for changes to source
 		// Better than calling grunt a million times
 		// (call 'grunt watch')
@@ -54,15 +66,15 @@ module.exports = function(grunt) {
 		    files: ['src/*'],
 		    tasks: ['default']
 		}
-
 	});
 
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-	grunt.registerTask("build", ["concat", "uglify"]);
+	grunt.registerTask("build", ["concat", "uglify", "cssmin"]);
 	grunt.registerTask("default", ["jshint", "build"]);
 	grunt.registerTask("travis", ["default"]);
 };

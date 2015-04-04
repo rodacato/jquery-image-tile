@@ -1,3 +1,11 @@
+/*
+ *  jquery-image-tile - v0.1.0
+ *  Image tile
+ *  http://imagetile.beat.so
+ *
+ *  Made by Adrian Castillo
+ *  Under MIT License
+ */
 ;(function ($, window, document, undefined) {
 
     var pluginName = "imageTile",
