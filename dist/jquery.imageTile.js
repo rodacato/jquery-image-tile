@@ -12,6 +12,8 @@
         dataKey = "plugin_" + pluginName;
 
     // Private Methods
+
+    // Set initial data values to handle transitions
     var setMetadata = function(ele) {
       var parent = $(ele).parent('li'),
           data = {
@@ -29,6 +31,7 @@
       return parent.data(data);
     };
 
+    // Update tile properties to move background image position
     var updateProperties = function(ele, img, data){
       var parent = $(ele).parent('li');
 
@@ -58,6 +61,7 @@
       parent.data('initialized', true);
     };
 
+    // Listen image tile click events and trigger onChange imageTile event
     var bindItemClick = function(ele){
       var that = this;
       $(ele).parent('li').on('click', function(){
@@ -71,9 +75,12 @@
           target.data('full', true).addClass('image-active');
           changeTiles(that, outerImage.attr('src'));
         }
+
+        that.options.onChange(target, target.data());
       });
     };
 
+    // Handle grid image change to new background image
     var changeTiles = function(scope, src){
       scope.element.find('li').each(function(index, item){
         var  innerImage = $(item).find('img');
@@ -81,6 +88,7 @@
       }).addClass('is-full-image');
     };
 
+    // Handle restore grid images to original state
     var restoreTiles = function(scope){
       scope.element.find('li').each(function(index, item){
         var innerImage = $(item).find('img')
@@ -89,33 +97,29 @@
       }).removeClass('is-full-image');
     };
 
-
-
-
-
-
+    // ImageTile object definition
     var ImageTile = function (element, options) {
         this.element = element;
 
         this.options = {
-          textColor: "#000",
           horizontalTiles: 4,
           verticalTiles: 2,
+          onChange: function(ele, data){}
         };
-
-        /*
-         * Initialization
-         */
 
         this.init(options);
     };
 
+    // Extend imageTile objects
     ImageTile.prototype = {
+
         // initialize options
         init: function (options) {
             $.extend(this.options, options);
 
             var that = this;
+
+            this.element.addClass('image-tile-container');
 
             // Hide images, and bind load event to get width/height
             this.element.find('li > img').load(function(){
@@ -128,8 +132,7 @@
         },
 
         // Public methods
-        publicMethod: function () {
-
+        publicMethod: function (callback) {
         }
     };
 
